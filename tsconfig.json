@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",                 // Target JavaScript version
-    "module": "commonjs",             // Module system for Node.js
+    "target": "ESNext",                 // Target JavaScript version
+    "module": "CommonJS",             // Module system for Node.js
     "strict": true,                   // Enable strict type-checking options
     "esModuleInterop": true,          // Enable interop between CommonJS and ES Modules
     "skipLibCheck": true,             // Skip type checking of declaration files

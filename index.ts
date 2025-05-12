@@ -11,7 +11,8 @@ import insertionSort from './src/sorting-algorithms/insertion-sort';
 import mergeSort from './src/sorting-algorithms/merge-sort';
 import quickSort from './src/sorting-algorithms/quick-sort';
 import radixSort from './src/sorting-algorithms/radix-sort';
-//import './src/data-structures/singly-linked-list';
+import singlyLinkedList from './src/data-structures/singly-linked-list';
+import doubleLinkedList from './src/data-structures/double-linked-list';
 
 // same();
 // findIndex();
@@ -27,3 +28,5 @@ import radixSort from './src/sorting-algorithms/radix-sort';
 // mergeSort();
 // quickSort();
 // radixSort();
+// singlyLinkedList()
+doubleLinkedList();
