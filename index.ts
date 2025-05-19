@@ -13,6 +13,7 @@ import quickSort from './src/sorting-algorithms/quick-sort';
 import radixSort from './src/sorting-algorithms/radix-sort';
 import singlyLinkedList from './src/data-structures/singly-linked-list';
 import doubleLinkedList from './src/data-structures/double-linked-list';
+import stacks from './src/data-structures/stacks';
 
 // same();
 // findIndex();
@@ -29,4 +30,5 @@ import doubleLinkedList from './src/data-structures/double-linked-list';
 // quickSort();
 // radixSort();
 // singlyLinkedList()
-doubleLinkedList();
+//doubleLinkedList();
+stacks()
