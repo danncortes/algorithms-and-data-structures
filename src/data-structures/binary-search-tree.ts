@@ -2,32 +2,32 @@ class BinarySearchTree {
     root: TreeNode | null = null;
 
     insert(value: number) {
-    const node = new TreeNode(value);
+        const node = new TreeNode(value);
 
-    if(!this.root) {
-        this.root = node;
-        return this;
-    } else {
-        let current = this.root;
+        if(!this.root) {
+            this.root = node;
+            return this;
+        } else {
+            let current = this.root;
 
-        while(true) {
-            if(value < current.value) {
-                if(!current.left) {
-                    current.left = node;
-                    return this;
+            while(true) {
+                if(value < current.value) {
+                    if(!current.left) {
+                        current.left = node;
+                        return this;
+                    } else {
+                        current = current.left;
+                    }
                 } else {
-                    current = current.left;
-                }
-            } else {
-                if(!current.right) {
-                    current.right = node;
-                    return this;
-                } else {
-                    current = current.right;
+                    if(!current.right) {
+                        current.right = node;
+                        return this;
+                    } else {
+                        current = current.right;
+                    }
                 }
             }
         }
-    }
     }
 
     find(value: number) {
@@ -45,6 +45,74 @@ class BinarySearchTree {
             }
         }
     }
+
+    _removeNode(node: TreeNode): TreeNode | null {
+        if(!node.left && !node.right) {
+            return null;
+        }
+        if(!node.right) {
+            return node.left;
+        }
+        
+        const newRight = node.right;
+        let newNode = newRight;
+        let preNew = newNode;
+
+        while(newNode.left) {
+            preNew = newNode;
+            newNode = newNode.left;
+        }
+        newNode.left = node.left;
+        if(newNode.value !== newRight.value) {
+            if(newNode.right) {
+                preNew!.left = newNode.right;
+            }
+            newNode.right = newRight
+        }
+        return newNode;
+    }
+
+    remove(value: number) {
+        if(!this.root) {
+            return null;
+        }
+
+        let removedNode;
+
+        if(value === this.root.value) {
+            removedNode = this.root;
+            this.root = this._removeNode(this.root);
+            return removedNode;
+        } else {
+            let current = this.root;
+
+            while(true) {
+                if(value < current.value) {
+                    if(!current.left) {
+                        return null;
+                    }
+                    if(value === current.left.value) {
+                        removedNode = current.left;
+                        current.left = this._removeNode(current.left);
+                        return removedNode;
+                    } else {
+                        current = current.left;
+                    }
+                } else {
+                    if(!current.right) {
+                        return null;
+                    }
+                    if(value === current.right.value) {
+                        removedNode = current.right;
+                        current.right = this._removeNode(current.right);
+                        return removedNode;
+                    } else {
+                        current = current.right;
+                    }
+                }
+            }
+        }
+    }
 }
 
 class TreeNode {
@@ -59,14 +127,30 @@ class TreeNode {
 }
 
 export default function binarySearchTree() {
-    const bst =  new BinarySearchTree();
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
-    bst.insert(2);
-    bst.insert(7);
-    bst.insert(12);
-    bst.insert(17);
-    console.log(bst.find(22));
+    const binarySearchTree = new BinarySearchTree();
+binarySearchTree
+    .insert(15)
+    .insert(20)
+    .insert(10)
+    .insert(12)
+    .insert(1)
+    .insert(5)
+    .insert(50)
+    .insert(60)
+    .insert(30)
+    .insert(25)
+    .insert(23)
+    .insert(24)
+    .insert(70);
+ 
+binarySearchTree.remove(10);
+console.log(binarySearchTree.root!.left!.value) // 12
+console.log(binarySearchTree.root!.left!.left!.value) // 1
+console.log(binarySearchTree.root!.left!.left!.right!.value) // 5
+ 
+binarySearchTree.remove(50);
+console.log(binarySearchTree.root?.right?.value) // 20
+console.log(binarySearchTree.root?.right?.right?.value) // 60
+console.log(binarySearchTree.root?.right?.right?.left?.value) // 30
 }
 
