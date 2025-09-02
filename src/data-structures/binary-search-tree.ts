@@ -113,6 +113,52 @@ class BinarySearchTree {
             }
         }
     }
+
+    findSecondLargest(): number | undefined {
+        if(!this.root) {
+            return undefined;
+        }
+
+        let secondLargest: TreeNode | undefined = undefined;
+
+        let current = this.root
+
+        while(current.right) {
+            secondLargest = current;
+            current = current.right;
+        }
+
+        return secondLargest?.value;
+    }
+
+    _countLeaves(node: TreeNode | null) {
+        let leaves = 0;
+        if(!node) {
+            return leaves
+        }
+
+        leaves++;
+
+        if(node.left) {
+            leaves += this._countLeaves(node.left);
+        }
+        if(node.right) {
+            leaves += this._countLeaves(node.right);
+        }
+        return leaves;
+    }
+
+
+    isBalanced() {
+        if(!this.root) {
+            return true;
+        }
+
+        const rightLeaf = this._countLeaves(this.root.right);
+        const leftLeaf = this._countLeaves(this.root.left);
+
+        return Math.abs(rightLeaf - leftLeaf) <= 1;
+    }
 }
 
 class TreeNode {
@@ -134,23 +180,26 @@ binarySearchTree
     .insert(10)
     .insert(12)
     .insert(1)
-    .insert(5)
-    .insert(50)
-    .insert(60)
-    .insert(30)
     .insert(25)
-    .insert(23)
-    .insert(24)
-    .insert(70);
+    // .insert(5)
+    // .insert(50)
+    // .insert(60)
+    // .insert(30)
+    // .insert(23)
+     .insert(24)
+    .insert(70)
+    .insert(90);
  
-binarySearchTree.remove(10);
-console.log(binarySearchTree.root!.left!.value) // 12
-console.log(binarySearchTree.root!.left!.left!.value) // 1
-console.log(binarySearchTree.root!.left!.left!.right!.value) // 5
+// binarySearchTree.remove(10);
+// console.log(binarySearchTree.root!.left!.value) // 12
+// console.log(binarySearchTree.root!.left!.left!.value) // 1
+// console.log(binarySearchTree.root!.left!.left!.right!.value) // 5
  
-binarySearchTree.remove(50);
-console.log(binarySearchTree.root?.right?.value) // 20
-console.log(binarySearchTree.root?.right?.right?.value) // 60
-console.log(binarySearchTree.root?.right?.right?.left?.value) // 30
+// binarySearchTree.remove(50);
+// console.log(binarySearchTree.root?.right?.value) // 20
+// console.log(binarySearchTree.root?.right?.right?.value) // 60
+// console.log(binarySearchTree.root?.right?.right?.left?.value) // 30
+console.log('findSecondLargest', binarySearchTree.findSecondLargest()) // 60
+console.log('isBalanced', binarySearchTree.isBalanced()) // 60
 }
 
