@@ -172,17 +172,43 @@ class BinarySearchTree {
             const firstNode = current.shift();
 
             if(firstNode) {
+                data.push(firstNode.value);
+
                 if(firstNode.left) {
                     current.push(firstNode.left);
                 }
                 if(firstNode.right) {
                     current.push(firstNode.right);
                 }
-                data.push(firstNode.value);
             }
         }
         return data;
+    }
 
+    _getDFPValues(node: TreeNode | null): number[] {
+        let values: number[] = [];
+
+        if(node) {
+            values.push(node.value)
+
+            if(node.left) {
+                values.push(...this._getDFPValues(node.left));
+            }
+
+            if(node.right) {
+                values.push(...this._getDFPValues(node.right));
+            }
+        }
+        
+        return values;
+    }
+
+    dfp() {
+        // Depth First Search
+        if(!this.root) {
+            return [];
+        }
+        return this._getDFPValues(this.root);
     }
 }
 
@@ -212,6 +238,9 @@ binarySearchTree
     // .insert(30)
     // .insert(23)
      .insert(24)
+     .insert(23)
+     .insert(22)
+     .insert(21)
     .insert(70)
     .insert(90);
  
@@ -227,5 +256,6 @@ binarySearchTree
 console.log('findSecondLargest', binarySearchTree.findSecondLargest()) // 60
 console.log('isBalanced', binarySearchTree.isBalanced()) // 60
 console.log('isBalanced', binarySearchTree.bfs()) // 60
+console.log('isBalanced', binarySearchTree.dfp()) // 60
 }
 
