@@ -159,6 +159,31 @@ class BinarySearchTree {
 
         return Math.abs(rightLeaf - leftLeaf) <= 1;
     }
+
+    bfs(): number[] {
+        // Breath First Search
+        let data: number[] = []
+        if(!this.root) {
+            return data;
+        }
+        let current = [this.root];
+
+        while(current.length) {
+            const firstNode = current.shift();
+
+            if(firstNode) {
+                if(firstNode.left) {
+                    current.push(firstNode.left);
+                }
+                if(firstNode.right) {
+                    current.push(firstNode.right);
+                }
+                data.push(firstNode.value);
+            }
+        }
+        return data;
+
+    }
 }
 
 class TreeNode {
@@ -201,5 +226,6 @@ binarySearchTree
 // console.log(binarySearchTree.root?.right?.right?.left?.value) // 30
 console.log('findSecondLargest', binarySearchTree.findSecondLargest()) // 60
 console.log('isBalanced', binarySearchTree.isBalanced()) // 60
+console.log('isBalanced', binarySearchTree.bfs()) // 60
 }
 
