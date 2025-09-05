@@ -136,7 +136,6 @@ class BinarySearchTree {
         if(!node) {
             return leaves
         }
-
         leaves++;
 
         if(node.left) {
@@ -147,7 +146,6 @@ class BinarySearchTree {
         }
         return leaves;
     }
-
 
     isBalanced() {
         if(!this.root) {
@@ -185,31 +183,71 @@ class BinarySearchTree {
         return data;
     }
 
-    _getDFPValues(node: TreeNode | null): number[] {
-        let values: number[] = [];
-
-        if(node) {
-            values.push(node.value)
-
-            if(node.left) {
-                values.push(...this._getDFPValues(node.left));
+    
+    dfsPre() {
+        function _getDFSPreValues(node: TreeNode | null): number[] {
+            let values: number[] = [];
+            if(node) {
+                values.push(node.value)
+                if(node.left) {
+                    values.push(..._getDFSPreValues(node.left));
+                }
+                if(node.right) {
+                    values.push(..._getDFSPreValues(node.right));
+                }
             }
-
-            if(node.right) {
-                values.push(...this._getDFPValues(node.right));
-            }
+            return values;
         }
-        
-        return values;
-    }
-
-    dfp() {
-        // Depth First Search
+        // Depth First Search Pre Order
         if(!this.root) {
             return [];
         }
-        return this._getDFPValues(this.root);
+        return _getDFSPreValues(this.root);
     }
+
+    
+    dfsPost() {
+        function _getDFSPostValues(node: TreeNode | null): number[] {
+            let values: number[] = [];
+            if(node) {
+                if(node.left) {
+                    values.push(..._getDFSPostValues(node.left));
+                }
+                if(node.right) {
+                    values.push(..._getDFSPostValues(node.right));
+                }
+                values.push(node.value)
+            }
+            return values;
+        }
+        // Depth First Search Pre Order
+        if(!this.root) {
+            return [];
+        }
+        return _getDFSPostValues(this.root);
+    }
+
+    
+    dfsInOrder() {
+        function _getDFSInOrderValues(node: TreeNode | null): number[] {
+            let values: number[] = [];
+            if(node) {
+                if(node.left) {
+                    values.push(..._getDFSInOrderValues(node.left));
+                }
+                values.push(node.value)
+                if(node.right) {
+                    values.push(..._getDFSInOrderValues(node.right));
+                }
+            }
+            return values;
+        }
+        // Depth First Search Pre Order
+        if(!this.root) {
+            return [];
+        }
+        return _getDFSInOrderValues(this.root);
+    }    
 }
 
 class TreeNode {
@@ -225,37 +263,35 @@ class TreeNode {
 
 export default function binarySearchTree() {
     const binarySearchTree = new BinarySearchTree();
-binarySearchTree
-    .insert(15)
-    .insert(20)
-    .insert(10)
-    .insert(12)
-    .insert(1)
-    .insert(25)
-    // .insert(5)
-    // .insert(50)
-    // .insert(60)
-    // .insert(30)
-    // .insert(23)
-     .insert(24)
-     .insert(23)
-     .insert(22)
-     .insert(21)
-    .insert(70)
-    .insert(90);
- 
-// binarySearchTree.remove(10);
-// console.log(binarySearchTree.root!.left!.value) // 12
-// console.log(binarySearchTree.root!.left!.left!.value) // 1
-// console.log(binarySearchTree.root!.left!.left!.right!.value) // 5
- 
-// binarySearchTree.remove(50);
-// console.log(binarySearchTree.root?.right?.value) // 20
-// console.log(binarySearchTree.root?.right?.right?.value) // 60
-// console.log(binarySearchTree.root?.right?.right?.left?.value) // 30
-console.log('findSecondLargest', binarySearchTree.findSecondLargest()) // 60
-console.log('isBalanced', binarySearchTree.isBalanced()) // 60
-console.log('isBalanced', binarySearchTree.bfs()) // 60
-console.log('isBalanced', binarySearchTree.dfp()) // 60
+    binarySearchTree
+        .insert(15)
+        .insert(20)
+        .insert(10)
+        .insert(12)
+        .insert(1)
+        .insert(25)
+        .insert(24)
+        .insert(23)
+        .insert(22)
+        .insert(21)
+        .insert(70)
+        .insert(90);
+    
+    console.log('findSecondLargest', binarySearchTree.findSecondLargest()) // 60
+    console.log('isBalanced', binarySearchTree.isBalanced()) // 60
+    console.log('bfs', binarySearchTree.bfs()) // 60
+    console.log('dfspre', binarySearchTree.dfsPre()) // 60
+    console.log('dfspost', binarySearchTree.dfsPost()) // 60
+
+    const binarySearchTree2 = new BinarySearchTree();
+    binarySearchTree2
+        .insert(10)
+        .insert(6)
+        .insert(15)
+        .insert(3)
+        .insert(8)
+        .insert(20)
+    console.log('dfspost', binarySearchTree2.dfsPost())
+    console.log('dfsInOrder', binarySearchTree2.dfsInOrder())
 }
 
