@@ -15,6 +15,7 @@ import singlyLinkedList from './src/data-structures/singly-linked-list';
 import doubleLinkedList from './src/data-structures/double-linked-list';
 import stacks from './src/data-structures/stacks';
 import binarySearchTree from './src/data-structures/binary-search-tree';
+import binaryHeaps from './src/data-structures/binary-heaps';
 
 // same();
 // findIndex();
@@ -33,4 +34,5 @@ import binarySearchTree from './src/data-structures/binary-search-tree';
 // singlyLinkedList()
 // doubleLinkedList();
 // stacks();
-binarySearchTree();
+//binarySearchTree();
+binaryHeaps();
