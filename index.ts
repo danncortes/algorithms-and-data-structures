@@ -16,6 +16,9 @@ import doubleLinkedList from './src/data-structures/double-linked-list';
 import stacks from './src/data-structures/stacks';
 import binarySearchTree from './src/data-structures/binary-search-tree';
 import binaryHeaps from './src/data-structures/binary-heaps';
+import prioriryQueue from './src/data-structures/priority-queue';
+import hashTable from './src/data-structures/hash-table';
+import graphs from './src/data-structures/graphs';
 
 // same();
 // findIndex();
@@ -35,4 +38,7 @@ import binaryHeaps from './src/data-structures/binary-heaps';
 // doubleLinkedList();
 // stacks();
 //binarySearchTree();
-binaryHeaps();
+// binaryHeaps();
+//prioriryQueue();
+//hashTable();
+graphs();
